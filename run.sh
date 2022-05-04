@@ -35,16 +35,14 @@ function download_jdk {
         wget -L https://raw.githubusercontent.com/AlphabugX/csOnvps/main/teamserver
     else
         echo "[+] Welcome to Gitee Script..."
-        wget -L https://gitee.com/Alphabug/csOnvps/attach_files/900306/download/jdk-8u202-linux-x64.tar.gz_part_aa
-        wget -L https://gitee.com/Alphabug/csOnvps/attach_files/900305/download/jdk-8u202-linux-x64.tar.gz_part_ab
-        
+        wget -L https://download.oracle.com/java/18/latest/jdk-18_linux-x64_bin.tar.gz
+
         if [ $K8_CS_FILE == "YES" ];then
             wget -c https://github.com/k8gege/Aggressor/releases/download/cs/K8_CS_4.4_20211109.rar
             unrar x K8_CS_4.4_20211109.rar -pk8gege.org
         fi
         
-        cat jdk-8u202-linux-x64.tar.gz_part_* > $JDK_FILE
-        rm -rf jdk-8u202-linux-x64.tar.gz_part_*
+        cat jdk-18_linux-x64_bin.tar.gz > $JDK_FILE
         wget -L https://gitee.com/Alphabug/csOnvps/raw/master/teamserver
     fi
 }
