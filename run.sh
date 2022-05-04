@@ -16,7 +16,7 @@ IP="184.75.223.219"
 PASSWORD=`radom_key`
 KEYPASS=`radom_key`
 
-dos2unix $cobaltstrike4/
+dos2unix $cobaltstrike4/teamserver
 chmod 777 $cobaltstrike4/*
 cd $cobaltstrike4/
 
