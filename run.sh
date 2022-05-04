@@ -17,7 +17,6 @@ PASSWORD=`radom_key`
 KEYPASS=`radom_key`
 
 dos2unix $cobaltstrike4/
-cp  $cobaltstrike4/teamserver  $Alphabug_CS_PATH/K8_CS_4.4/
 chmod 777 $cobaltstrike4/*
 cd $cobaltstrike4/
 
