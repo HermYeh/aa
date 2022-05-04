@@ -4,7 +4,6 @@
 mkdir Alphabug_CS
 cd Alphabug_CS
 Alphabug_CS_PATH=`pwd`
-K8_CS_FILE=$Alphabug_CS_PATH/"K8_CS_4.4_20211109.rar"
 JDK_FILE=$Alphabug_CS_PATH/"jdk-18_linux-x64_bin.tar.gz"
 
 function radom_key(){
@@ -12,40 +11,6 @@ function radom_key(){
     echo $KEY
 }
 sudo apt update && sudo apt install unrar uuid dos2unix -y
-function download_jdk {
-    
-    if [ -f "$K8_CS_FILE" ];then
-        K8_CS_MD5="913d774e5cf0bfad4adfa900997f7a1a"
-        K8_CS_MD5_test=`md5sum $K8_CS_FILE | awk -F" " '{print $1}'`
-        if [ $K8_CS_MD5 != $K8_CS_MD5_test];then
-            K8_CS_FILE="NO"
-            rm -rf $K8_CS_FILE
-        fi
-    else
-        K8_CS_FILE="YES"
-    fi
-
-    if ((`curl https://objects.githubusercontent.com --connect-timeout 5 -m 5 -s | wc -l` > 10)) ; then
-        echo "[+] Welcome to Github Script..."
-        wget -L https://download.oracle.com/java/18/latest/jdk-18_linux-x64_bin.tar.gz
-        if [ $K8_CS_FILE == "YES" ];then
-            wget -c https://github.com/k8gege/Aggressor/releases/download/cs/K8_CS_4.4_20211109.rar
-            unrar x K8_CS_4.4_20211109.rar -pk8gege.org
-        fi
-        wget -L https://raw.githubusercontent.com/AlphabugX/csOnvps/main/teamserver
-    else
-        echo "[+] Welcome to Gitee Script..."
-        wget -L https://download.oracle.com/java/18/latest/jdk-18_linux-x64_bin.tar.gz
-
-        if [ $K8_CS_FILE == "YES" ];then
-            wget -c https://github.com/k8gege/Aggressor/releases/download/cs/K8_CS_4.4_20211109.rar
-            unrar x K8_CS_4.4_20211109.rar -pk8gege.org
-        fi
-        
-        cat jdk-18_linux-x64_bin.tar.gz > $JDK_FILE
-        wget -L https://raw.githubusercontent.com/AlphabugX/csOnvps/main/teamserver
-    fi
-}
 
 # rm -rf *.tar*
 # 改K8 CS的默认配置，改成随机
