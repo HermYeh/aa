@@ -1,10 +1,7 @@
 #!/bin/bash
 # By Alphabug
 # Github https://github.com/AlphabugX/csOnvps
-mkdir Alphabug_CS
-cd Alphabug_CS
 Alphabug_CS_PATH=`pwd`
-JDK_FILE=$Alphabug_CS_PATH/"jdk-18_linux-x64_bin.tar.gz"
 
 function radom_key(){
     KEY=`uuid | md5sum |awk -F' ' '{ print $1}'`
@@ -19,10 +16,10 @@ IP="184.75.223.219"
 PASSWORD=`radom_key`
 KEYPASS=`radom_key`
 
-dos2unix $cobaltstrike4.4/teamserver
-cp  $cobaltstrike4.4/teamserver  $Alphabug_CS_PATH/K8_CS_4.4/
-chmod 777 $cobaltstrike4.4/*
-cd $cobaltstrike4.4/
+dos2unix $cobaltstrike4/teamserver
+cp  $cobaltstrike4/teamserver  $Alphabug_CS_PATH/K8_CS_4.4/
+chmod 777 $cobaltstrike4/*
+cd $cobaltstrike4/
 
 
 PORT=20648
@@ -30,7 +27,7 @@ PORT=20648
 sed -i "s/SET_TEAMSERVER_PORT/$PORT/g" teamserver
 sed -i "s/SET_TEAMSERVER_KEY/$KEYPASS/g" teamserver
 
-install_log="$cobaltstrike4.4/install.log"
+install_log="$cobaltstrike4/install.log"
 
 echo "[+] Teamserver IP:" $IP >> $install_log
 echo "[+] Teamserver Port:" $PORT >> $install_log
@@ -38,7 +35,7 @@ echo "[+] Teamserver Password:" $PASSWORD >> $install_log
 echo "[+] Teamserver keyStorePassword:" $KEYPASS >> $install_log
 
 
-nohup $cobaltstrike4.4/teamserver $IP $PASSWORD &
+nohup $cobaltstrike4/teamserver $IP $PASSWORD &
 
 PID=`sudo ps -ef | grep $PASSWORD |awk -F" " '{ print $2 }' |tr "\n" " "` >> $install_log
 echo "[+] Teamserver PID:" $PID >> $install_log
@@ -53,7 +50,7 @@ fi
 
 mv $install_log $Alphabug_CS_PATH/log/`date +%Y%m%d_%H%M%S.log`
 # uninstall script
-uninstall=$cobaltstrike4.4/uninstall.sh
+uninstall=$cobaltstrike4/uninstall.sh
 
 echo "kill -KILL " $PID >> $uninstall
 chmod +x $uninstall
