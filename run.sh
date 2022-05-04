@@ -17,8 +17,8 @@ PASSWORD=`radom_key`
 KEYPASS=`radom_key`
 
 dos2unix ./cobaltstrike4/teamserver
-chmod 777 $cobaltstrike4/*
-cd $cobaltstrike4/
+chmod 777 ./rrrbcobaltstrike4/*
+cd ./cobaltstrike4/
 
 
 PORT=20648
