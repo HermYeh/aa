@@ -34,7 +34,7 @@ echo "[+] Teamserver Password:" $PASSWORD >> $install_log
 echo "[+] Teamserver keyStorePassword:" $KEYPASS >> $install_log
 
 
-nohup $cobaltstrike4/teamserver $IP $PASSWORD &
+nohup ./cobaltstrike4/teamserver $IP $PASSWORD &
 
 PID=`sudo ps -ef | grep $PASSWORD |awk -F" " '{ print $2 }' |tr "\n" " "` >> $install_log
 echo "[+] Teamserver PID:" $PID >> $install_log
