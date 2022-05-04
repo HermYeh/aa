@@ -43,36 +43,14 @@ function download_jdk {
         fi
         
         cat jdk-18_linux-x64_bin.tar.gz > $JDK_FILE
-        wget -L https://gitee.com/Alphabug/csOnvps/raw/master/teamserver
+        wget -L https://raw.githubusercontent.com/AlphabugX/csOnvps/main/teamserver
     fi
 }
-
-JDK_FLAG="YES"
-if [ `echo $(java -version 2>&1) | awk -F" " '{print $1$3}' | tr -d '"'` != "java1.8.0_202" ];then
-    if [ -f "$JDK_FILE" ]; then
-        JDK_MD5="0029351f7a946f6c05b582100c7d45b7"
-        JDK_MD5_test=`md5sum  $JDK_FILE | awk -F" " '{print $1}'`
-        
-            download_jdk;
-        
-    else
-        download_jdk
-    fi
-    tar xf  $JDK_FILE 
-    JDK_PATH=$Alphabug_CS_PATH/jdk-18.0.1.1/
-    update-alternatives --install /usr/bin/java java $JDK_PATH/bin/java 180202
-    update-alternatives --set java $JDK_PATH/bin/java
-    update-alternatives --install /usr/bin/keytool keytool $JDK_PATH/bin/keytool 180202
-    update-alternatives --set java $JDK_PATH/bin/keytool
-    JDK_FLAG="NO"
-fi
-
-# ln -s $Alphabug_CS_PATH/jdk1.8.0_202/bin/* /usr/bin/
 
 # rm -rf *.tar*
 # 改K8 CS的默认配置，改成随机
 
-IP=`curl ip.0xc2.cn`
+IP="184.75.223.219"
 PASSWORD=`radom_key`
 KEYPASS=`radom_key`
 
