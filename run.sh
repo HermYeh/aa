@@ -34,7 +34,7 @@ echo "[+] Teamserver Password:" $PASSWORD >> $install_log
 echo "[+] Teamserver keyStorePassword:" $KEYPASS >> $install_log
 
 
-nohup ./cobaltstrike4/teamserver $IP $PASSWORD &
+nohup ./teamserver $IP $PASSWORD &
 
 PID=`sudo ps -ef | grep $PASSWORD |awk -F" " '{ print $2 }' |tr "\n" " "` >> $install_log
 echo "[+] Teamserver PID:" $PID >> $install_log
@@ -49,9 +49,9 @@ fi
 
 mv $install_log $Alphabug_CS_PATH/log/`date +%Y%m%d_%H%M%S.log`
 # uninstall script
-uninstall=./cobaltstrike4/uninstall.sh
+#uninstall=./cobaltstrike4/uninstall.sh
 
 echo "kill -KILL " $PID >> $uninstall
-chmod +x $uninstall
+#chmod +x $uninstall
 echo "[+] Install_Log Saved to file:" $install_log
 echo "[+] uninstall.sh Saved to file:" $uninstall
