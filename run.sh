@@ -19,29 +19,18 @@ IP="184.75.223.219"
 PASSWORD=`radom_key`
 KEYPASS=`radom_key`
 
-dos2unix $Alphabug_CS_PATH/teamserver
-cp  $Alphabug_CS_PATH/teamserver  $Alphabug_CS_PATH/K8_CS_4.4/
-chmod 777 $Alphabug_CS_PATH/K8_CS_4.4/*
-cd $Alphabug_CS_PATH/K8_CS_4.4/
+dos2unix $cobaltstrike4.4/teamserver
+cp  $cobaltstrike4.4/teamserver  $Alphabug_CS_PATH/K8_CS_4.4/
+chmod 777 $cobaltstrike4.4/*
+cd $cobaltstrike4.4/
 
-PORT=0
-#判断当前端口是否被占用，没被占用返回0，反之1
-function Listening {
-   TCPListeningnum=`netstat -an | grep ":$1 " | awk '$1 == "tcp" && $NF == "LISTEN" {print $0}' | wc -l`
-   UDPListeningnum=`netstat -an | grep ":$1 " | awk '$1 == "udp" && $NF == "0.0.0.0:*" {print $0}' | wc -l`
-   (( Listeningnum = TCPListeningnum + UDPListeningnum ))
-   if [ $Listeningnum == 0 ]; then
-       echo "0"
-   else
-       echo "1"
-   fi
-}
+
 PORT=20648
 # 配置teamserver
 sed -i "s/SET_TEAMSERVER_PORT/$PORT/g" teamserver
 sed -i "s/SET_TEAMSERVER_KEY/$KEYPASS/g" teamserver
 
-install_log="$Alphabug_CS_PATH/install.log"
+install_log="$cobaltstrike4.4/install.log"
 
 echo "[+] Teamserver IP:" $IP >> $install_log
 echo "[+] Teamserver Port:" $PORT >> $install_log
@@ -49,7 +38,7 @@ echo "[+] Teamserver Password:" $PASSWORD >> $install_log
 echo "[+] Teamserver keyStorePassword:" $KEYPASS >> $install_log
 
 
-nohup $Alphabug_CS_PATH/K8_CS_4.4/teamserver $IP $PASSWORD &
+nohup $cobaltstrike4.4/teamserver $IP $PASSWORD &
 
 PID=`sudo ps -ef | grep $PASSWORD |awk -F" " '{ print $2 }' |tr "\n" " "` >> $install_log
 echo "[+] Teamserver PID:" $PID >> $install_log
@@ -64,7 +53,7 @@ fi
 
 mv $install_log $Alphabug_CS_PATH/log/`date +%Y%m%d_%H%M%S.log`
 # uninstall script
-uninstall=$Alphabug_CS_PATH/uninstall.sh
+uninstall=$cobaltstrike4.4/uninstall.sh
 
 echo "kill -KILL " $PID >> $uninstall
 chmod +x $uninstall
