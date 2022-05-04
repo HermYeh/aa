@@ -67,9 +67,6 @@ mv $install_log $Alphabug_CS_PATH/log/`date +%Y%m%d_%H%M%S.log`
 uninstall=$Alphabug_CS_PATH/uninstall.sh
 
 echo "kill -KILL " $PID >> $uninstall
-if [ $JDK_FLAG == "NO" ];then 
-    echo "update-alternatives --remove java $JDK_PATH/bin/java" >> $uninstall
-fi
 chmod +x $uninstall
 echo "[+] Install_Log Saved to file:" $install_log
 echo "[+] uninstall.sh Saved to file:" $uninstall
