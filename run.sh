@@ -49,7 +49,7 @@ fi
 
 mv $install_log $Alphabug_CS_PATH/log/`date +%Y%m%d_%H%M%S.log`
 # uninstall script
-uninstall=$cobaltstrike4/uninstall.sh
+uninstall=./cobaltstrike4/uninstall.sh
 
 echo "kill -KILL " $PID >> $uninstall
 chmod +x $uninstall
