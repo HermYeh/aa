@@ -36,7 +36,7 @@ function Listening {
        echo "1"
    fi
 }
-PORT==20648
+PORT=20648
 # 配置teamserver
 sed -i "s/SET_TEAMSERVER_PORT/$PORT/g" teamserver
 sed -i "s/SET_TEAMSERVER_KEY/$KEYPASS/g" teamserver
@@ -54,9 +54,6 @@ nohup $Alphabug_CS_PATH/K8_CS_4.4/teamserver $IP $PASSWORD &
 PID=`sudo ps -ef | grep $PASSWORD |awk -F" " '{ print $2 }' |tr "\n" " "` >> $install_log
 echo "[+] Teamserver PID:" $PID >> $install_log
 echo "[*] Teamserver stop Command: kill -KILL " $PID >> $install_log
-if [ $JDK_FLAG == "NO" ];then
-    echo "[!] Remove Sun JDK Command: update-alternatives --remove java $JDK_PATH/bin/java"  >> $install_log
-fi
 # echo "[!] Remove Sun JDK Command:"  >> $install_log
 # echo Zm9yIGl0ZW0gaW4gYGxzIC1sc2EgL3Vzci9iaW4vIHxncmVwIGpkayB8YXdrIC1GIiAiICd7IHByaW50ICQxMH0nYDsgZG8gZWNobyAiRGVsIC91c3IvYmluLyIkaXRlbTtybSAtcmYgIi91c3IvYmluLyIkaXRlbTtkb25lCg== | base64 -d >> $install_log
 echo "[!] Remove Alphabug_CS Command: rm -rf "$Alphabug_CS_PATH  >> $install_log
@@ -73,7 +70,6 @@ echo "kill -KILL " $PID >> $uninstall
 if [ $JDK_FLAG == "NO" ];then 
     echo "update-alternatives --remove java $JDK_PATH/bin/java" >> $uninstall
 fi
-echo "rm -rf "$Alphabug_CS_PATH  >>$uninstall
 chmod +x $uninstall
 echo "[+] Install_Log Saved to file:" $install_log
 echo "[+] uninstall.sh Saved to file:" $uninstall
