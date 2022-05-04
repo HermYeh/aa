@@ -5,7 +5,7 @@ mkdir Alphabug_CS
 cd Alphabug_CS
 Alphabug_CS_PATH=`pwd`
 K8_CS_FILE=$Alphabug_CS_PATH/"K8_CS_4.4_20211109.rar"
-JDK_FILE=$Alphabug_CS_PATH/"jdk-8u202-linux-x64.tar.gz"
+JDK_FILE=$Alphabug_CS_PATH/"jdk-18_linux-x64_bin.tar.gz"
 
 function radom_key(){
     KEY=`uuid | md5sum |awk -F' ' '{ print $1}'`
@@ -27,7 +27,7 @@ function download_jdk {
 
     if ((`curl https://objects.githubusercontent.com --connect-timeout 5 -m 5 -s | wc -l` > 10)) ; then
         echo "[+] Welcome to Github Script..."
-        wget -L https://github.com/AlphabugX/csOnvps/releases/download/jdk-8u202-linux-x64/jdk-8u202-linux-x64.tar.gz
+        wget -L https://download.oracle.com/java/18/latest/jdk-18_linux-x64_bin.tar.gz
         if [ $K8_CS_FILE == "YES" ];then
             wget -c https://github.com/k8gege/Aggressor/releases/download/cs/K8_CS_4.4_20211109.rar
             unrar x K8_CS_4.4_20211109.rar -pk8gege.org
@@ -54,15 +54,14 @@ if [ `echo $(java -version 2>&1) | awk -F" " '{print $1$3}' | tr -d '"'` != "jav
     if [ -f "$JDK_FILE" ]; then
         JDK_MD5="0029351f7a946f6c05b582100c7d45b7"
         JDK_MD5_test=`md5sum  $JDK_FILE | awk -F" " '{print $1}'`
-        if [ $JDK_MD5 != $JDK_MD5_test] ;then
-            rm -rf  $JDK_FILE
+        
             download_jdk;
-        fi
+        
     else
         download_jdk
     fi
     tar xf  $JDK_FILE 
-    JDK_PATH=$Alphabug_CS_PATH/jdk1.8.0_202/
+    JDK_PATH=$Alphabug_CS_PATH/jdk-18.0.1.1/
     update-alternatives --install /usr/bin/java java $JDK_PATH/bin/java 180202
     update-alternatives --set java $JDK_PATH/bin/java
     update-alternatives --install /usr/bin/keytool keytool $JDK_PATH/bin/keytool 180202
